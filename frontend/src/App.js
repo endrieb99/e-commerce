@@ -2,6 +2,7 @@ import NavBar from './components/NavBar';
 import About from './pages/About/About';
 import ScrollIntoView from './components/Scrollinintoview'
 import Home from './pages/Home'
+import Contact from './pages/Contact/Contact'
 import React, {useState,useEffect} from 'react'
 import {BrowserRouter as Router , Switch ,Route } from 'react-router-dom'
 import { ChakraProvider } from "@chakra-ui/react"
@@ -27,8 +28,8 @@ const App = () => {
                  <Switch>  
                  <Route path="/" exact component={Home}/>            
                  <Route path="/about" component={About}/>
+                 <Route path="/contact" component={Contact}/>
                  </Switch>
-
           </>
          }
         </ScrollIntoView>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Slider from '../components/Slider'
 import Cardscg from '../components/Cardscg'
 import CgDiv from '../components/CgDiv'
