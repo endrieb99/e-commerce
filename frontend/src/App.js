@@ -1,11 +1,13 @@
 import NavBar from './components/NavBar';
 import ScrollIntoView from './components/Scrollinintoview'
-import Home from './Pages/Home'
-import Contact from './Pages/Contact/Contact'
-import Footer from './Pages/Footer/Footer'
-import About from './Pages/About/About'
+import Home from './pages/Home'
+import Contact from './pages/Contact/Contact'
+import Footer from './pages/Footer/Footer'
+import About from './pages/About/About'
+import Shop from './pages/Shop'
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import HashLoader from "react-spinners/HashLoader";
 import { ChakraProvider } from "@chakra-ui/react"
 
 const App = () => {
@@ -23,16 +25,20 @@ const App = () => {
       <ChakraProvider>
         <Router>
           <ScrollIntoView>
-            {
+            { loading ?   
+            <div className='loading'>
+                 <HashLoader   color={"#1e1e2c"}  loading={loading} size={40} />
+            </div>
+          :
               <>
                 <NavBar />
                 <Switch>
                   <Route path="/" exact component={Home} />
                   <Route path="/contact" component={Contact} />
-                  <Route path="/About" component={About} />
-                  <Route path="/Footer" component={Footer} />
-
+                  <Route path="/about" component={About} />
+                  <Route path="/shop" component={Shop} />
                 </Switch>
+                <Footer/>
               </>
             }
           </ScrollIntoView>
