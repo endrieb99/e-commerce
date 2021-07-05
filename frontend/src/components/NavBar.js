@@ -1,54 +1,83 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import React , {useRef,useState,useEffect} from 'react'
+import { Route } from 'react-router-dom';
+import {Link, NavLink } from 'react-router-dom'
+import {MdSearch} from "react-icons/all"
+import SearchNav from './SearchNav';
 
+ const Nav = ({history}) => {
+   
+     //search
+     const searchRef = useRef(null)
+     const [showSearchIc,setShowSearchIc] = useState(false)
+     //Burger
+     const Buric = useRef(null)
+     const navLinks = useRef(null)
+     const rightItems = useRef(null)
+   
 
-const NavBar = ({ history }) => {
-    //Burger
-    const Buric = useRef(null)
-    const navLinks = useRef(null)
-    const rightItems = useRef(null)
+     const onSeacrhFun= () =>
+        {
 
-    const onBurgActive = () => {
-        //Toggle Nav
+                //Search Icon state + Bar
+            setShowSearchIc(!showSearchIc) //false
+            console.log(showSearchIc)
+            searchRef.current.classList.toggle('searchActive')
+            searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
+        }  
+        const onDelSeacrh =  () =>{
+            
+            setShowSearchIc(!showSearchIc) //true
+            searchRef.current.classList.toggle('searchActive')
 
-        const links = document.querySelectorAll('.navLinks li')
-        // navLinks.current.classList.toggle('burgerActive')
-        rightItems.current.classList.toggle('burgerActive')
-        //Animate Links
-        links.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = "";
-                rightItems.current.style.animation = "";
-            }
-            else {
+        }
 
-                link.style.animation = `moving 0.5s ease forwards ${index / 5}s`
-                rightItems.current.style.animation = `moving 0.5s ease forwards ${index / 5}s`
+        const onBurgActive = () =>{
+            //Toggle Nav
 
-            }
-        });
-        //Burger Animation
-        Buric.current.classList.toggle('toggle')
-    }
-
+            const links = document.querySelectorAll('.navLinks li')
+            // navLinks.current.classList.toggle('burgerActive')
+            rightItems.current.classList.toggle('burgerActive')
+            //Animate Links
+            links.forEach((link,index) => {
+             if(link.style.animation)
+                  {
+                        link.style.animation = "";
+                        rightItems.current.style.animation = "";
+                   }
+                else 
+                { 
+                       
+                        link.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
+                        rightItems.current.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
+                       
+                    }
+            });
+            //Burger Animation
+            Buric.current.classList.toggle('toggle')
+        }
+       
     return (
-        <nav className="nav" >
-            <div className="logo"><Link to=''>ALBANIA MARKET</Link></div>
-            <ul className="navLinks">
-                <NavLink to="/" exact activeClassName='activlink' ><li>Home</li></NavLink>
+       <nav className="nav">
+           <div className="logo"><Link to =''>EAST CLOTHING</Link></div>
+            <ul className="navLinks" ref= {navLinks}>
+                <NavLink to="/" exact  activeClassName='activlink' ><li>Home</li></NavLink>
                 <NavLink to="/shop" activeClassName='activlink' ><li>Shop</li></NavLink>
-                <NavLink to="/contact" activeClassName='activlink' ><li>Contact us</li></NavLink>
-                <NavLink to="/about" activeClassName='activlink'><li>About</li></NavLink>
+                <NavLink to="/contact"activeClassName='activlink' ><li>Contact us</li></NavLink>
+                <NavLink to="/about" activeClassName='activlink'><li>About</li></NavLink>  
             </ul>
-            <div className="burger" ref={Buric} onClick={onBurgActive}>
+            <div className="burger" ref= {Buric} onClick = {onBurgActive}>
                 <div className='line1'></div>
                 <div className='line2'></div>
                 <div className='line3'></div>
             </div>
-            <div className="rightComp" ref={rightItems}>
-            </div>
-        </nav>
-    )
+        <div className = "rightComp" ref = {rightItems}>
+        <div  ref={searchRef} className="search">
+        <Route render={({history}) => <SearchNav history ={history}/>}/>
+        </div>
+                { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSeacrhFun}/>  }  
+        </div>
+       </nav>
+    )                   
 }
 
-export default NavBar
+export default Nav    
