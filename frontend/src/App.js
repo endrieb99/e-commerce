@@ -27,7 +27,7 @@ const App = () => {
           <ScrollIntoView>
             { loading ?   
             <div className='loading'>
-                 <HashLoader   color={"#1e1e2c"}  loading={loading} size={40} />
+                 <HashLoader   color={"#1e1e2c"}  loading={loading} size={90} />
             </div>
           :
               <>

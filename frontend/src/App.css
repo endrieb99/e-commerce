@@ -80,7 +80,11 @@ nav {
 .search {
   display: none;
 }
-
+.iconCart,
+.signin {
+  cursor: pointer;
+  font-size: 0.9em;
+}
 .rightComp {
   align-items: center;
   display: flex;
@@ -88,12 +92,27 @@ nav {
   margin-left: 300px;
   margin-right: 20px;
 }
-
+.signin {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  color: #000000;
+  border: 2px solid;
+  transition: all 0.2s;
+}
 .iconSearch {
   margin-right: 20px;
   cursor: pointer;
 }
-
+.signin:hover {
+  border-color: #000000;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0.5em 0.5em -0.4em #000000;
+  transform: translateY(-0.25em);
+}
 .searchActive {
   display: flex;
   margin-left: 0;
@@ -455,7 +474,6 @@ nav {
   .burger {
     position: absolute;
     right: 0px;
-    margin-right: 12px;
     display: inline-block;
   }
 }
