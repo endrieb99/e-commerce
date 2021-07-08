@@ -22,7 +22,6 @@
   border-radius: 10px;
   background-color: #0071dc;
 }
-
 .loading {
   z-index: 20;
   text-align: center;
@@ -429,15 +428,12 @@ nav {
     background: url("product2media.png") no-repeat center top/cover;
   }
   .slide:nth-child(2) {
-    /* position: absolute; */
     background-position: right;
   }
   .slide:nth-child(3) {
-    /* position: absolute; */
     background-position: bottom 10px right -100px;
   }
   .slide:nth-child(4) {
-    /* position: absolute; */
     background-position: right;
   }
   .slide .titleslider {
@@ -504,4 +500,15 @@ nav {
 }
 .burgerActive {
   transform: translateX(0%);
+}
+
+@keyframes moving {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }

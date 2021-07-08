@@ -1,13 +1,14 @@
-
 import React , {useRef,useState,useEffect} from 'react'
 import { Route } from 'react-router-dom';
 import {Link, NavLink } from 'react-router-dom'
-import {MdSearch,BsArrowRightShort,MdKeyboardArrowRight} from "react-icons/all"
+import {RiShoppingCart2Line,MdSearch,BsArrowRightShort,MdKeyboardArrowRight} from "react-icons/all"
 import SearchNav from './SearchNav';
 
-
  const Nav = ({history}) => {
-   
+    const [incart] = useState(0);
+    const[nav,setNav]=useState(false)
+    const Nav = useRef(null)
+
      //search
      const searchRef = useRef(null)
      const [showSearchIc,setShowSearchIc] = useState(false)
@@ -15,10 +16,9 @@ import SearchNav from './SearchNav';
      const Buric = useRef(null)
      const navLinks = useRef(null)
      const rightItems = useRef(null)
-      //signin
-    const [signin,setSignin] = useState(null)
+     //signin
+     const [signin,setSignin] = useState(null)
 
-   
 
      const onSeacrhFun= () =>
         {
@@ -40,7 +40,7 @@ import SearchNav from './SearchNav';
             //Toggle Nav
 
             const links = document.querySelectorAll('.navLinks li')
-            // navLinks.current.classList.toggle('burgerActive')
+            navLinks.current.classList.toggle('burgerActive')
             rightItems.current.classList.toggle('burgerActive')
             //Animate Links
             links.forEach((link,index) => {
@@ -51,6 +51,7 @@ import SearchNav from './SearchNav';
                    }
                 else 
                 { 
+                       
                         link.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                         rightItems.current.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                        
@@ -59,9 +60,17 @@ import SearchNav from './SearchNav';
             //Burger Animation
             Buric.current.classList.toggle('toggle')
         }
-       
+        const onChangeBack= () =>{
+            if(window.scrollY >= 60){
+               setNav(true)
+            }
+            else  setNav(false)
+        }
+        window.addEventListener('scroll',onChangeBack)
+        
+    
     return (
-       <nav className="nav">
+       <nav ref = {Nav}  className={`nav ${nav ? 'active' : ''}`} >
            <div className="logo"><Link to =''>ALBANIA MARKET</Link></div>
             <ul className="navLinks" ref= {navLinks}>
                 <NavLink to="/" exact  activeClassName='activlink' ><li>Home</li></NavLink>
@@ -78,15 +87,21 @@ import SearchNav from './SearchNav';
         <div  ref={searchRef} className="search">
         <Route render={({history}) => <SearchNav history ={history}/>}/>
         </div>
-                { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSeacrhFun}/>  }  
-                <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
-                            { !signin ? <BsArrowRightShort  size='25'/>  : <MdKeyboardArrowRight size='25'  /> }
-
+                { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSeacrhFun}/>  }
+                <Link to='/cart' > <RiShoppingCart2Line className='iconCart' size='26' />
+                { 
+                <div className='dotcart'>
+                    {incart}
                 </div>
-                </Link>
+                }
+                 </Link>
+                            <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
+                            { !signin ? <BsArrowRightShort  size='25'/>  : <MdKeyboardArrowRight size='25'  /> }
+                        </div>
+                        </Link>
         </div>
        </nav>
     )                   
 }
 
-export default Nav
+export default Nav 
