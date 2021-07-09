@@ -1,5 +1,4 @@
 import React from 'react'
-// import ProductsC from '../components/ProductsC';
 import  "./Shop.css";
 import { Helmet } from 'react-helmet';
 
@@ -9,7 +8,6 @@ const Shop = () => {
             <Helmet>
                 <title>Shop</title>
             </Helmet>
-            {/* <ProductsC /> */}
         </div>
     )
 }

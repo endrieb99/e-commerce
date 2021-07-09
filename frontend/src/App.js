@@ -6,6 +6,7 @@ import Footer from './pages/Footer/Footer'
 import About from './pages/About/About'
 import Shop from './pages/Shop'
 import LoginScreen from './pages/Login/LoginScreen'
+import RegisterScreen from './components/RegisterScreen'
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import HashLoader from "react-spinners/HashLoader";
@@ -39,6 +40,7 @@ const App = () => {
                   <Route path="/about" component={About} />
                   <Route path="/shop" component={Shop} />
                   <Route path="/login" component={LoginScreen}/>
+                  <Route path="/register" component={RegisterScreen}/>
                 </Switch>
                 <Footer/>
               </>

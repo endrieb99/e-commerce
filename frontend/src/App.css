@@ -502,6 +502,10 @@ nav {
   transform: translateX(0%);
 }
 
+.registerSc {
+  margin-top: 50px;
+}
+
 @keyframes moving {
   from {
     opacity: 0;
