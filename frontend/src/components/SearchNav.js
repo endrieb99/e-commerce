@@ -1,15 +1,14 @@
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
 import React, { useState } from 'react'
-import { IoCloseOutline } from 'react-icons/io5'
 import { MdSearch } from 'react-icons/md'
 
 const SearchNav = ({history}) => {
     const [keyword, setkeyword] = useState('')
-
     const Handlesearch = (e) => {
         if(keyword.trim() && e.which === 13){
             history.push(`/search/${keyword}`)
-        }else{
+        } 
+        else {
         }
     }
     return (

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import {Form, Image} from 'react-bootstrap'
+import {Image} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import avatarRegister from './img/avatarRegister.svg'
 import { Helmet } from 'react-helmet';

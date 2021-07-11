@@ -19,24 +19,21 @@ import SearchNav from './SearchNav';
      //signin
      const [signin,setSignin] = useState(null)
 
-
      const onSeacrhFun= () =>
         {
-
                 //Search Icon state + Bar
             setShowSearchIc(!showSearchIc) //false
             console.log(showSearchIc)
             searchRef.current.classList.toggle('searchActive')
             searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
         }  
-        const onDelSeacrh =  () =>{
+    const onDelSeacrh =  () =>{
             
             setShowSearchIc(!showSearchIc) //true
             searchRef.current.classList.toggle('searchActive')
 
         }
-
-        const onBurgActive = () =>{
+    const onBurgActive = () =>{
             //Toggle Nav
 
             const links = document.querySelectorAll('.navLinks li')
@@ -68,7 +65,6 @@ import SearchNav from './SearchNav';
         }
         window.addEventListener('scroll',onChangeBack)
         
-    
     return (
        <nav ref = {Nav}  className={`nav ${nav ? 'active' : ''}`} >
            <div className="logo"><Link to =''>ALBANIA MARKET</Link></div>

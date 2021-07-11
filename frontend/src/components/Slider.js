@@ -28,7 +28,7 @@ const Slider = () => {
     const [auto, setauto] = useState(true);
     const intervaltime = 6000;
     let slideinterval;
-    
+
     const nextslide = () => {
         clearInterval(slideinterval);
         slideinterval = setInterval(nextslide, intervaltime);

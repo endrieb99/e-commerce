@@ -1,5 +1,6 @@
 import React from 'react'
 import  "./Shop.css";
+import  ProductsC from "../components/ProductsC";
 import { Helmet } from 'react-helmet';
 
 const Shop = () => {
@@ -8,6 +9,7 @@ const Shop = () => {
             <Helmet>
                 <title>Shop</title>
             </Helmet>
+            <ProductsC />
         </div>
     )
 }

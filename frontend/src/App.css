@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+.nothingfound {
+  width: 50%;
+  margin: 0 40%;
+  font-size: 20px;
+  font-weight: 700;
+}
 * {
   padding: 0;
   margin: 0;
@@ -379,6 +385,238 @@ nav {
   background: url("./img1.jpg") no-repeat center top/cover;
 }
 
+.Cgfilter {
+  margin: 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60%, 1fr));
+  grid-template-rows: repeat(auto-fit, 1fr);
+  row-gap: 8px;
+}
+.Cgfilter h1 {
+  width: 100%;
+  align-self: center;
+  font-size: 30px;
+  font-weight: 700;
+  font-style: bold;
+  margin-left: 20px;
+}
+.filters {
+  margin-top: 20px;
+  grid-row: 2/2;
+  justify-self: start;
+  margin-left: 20px;
+}
+.filters ul {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, minmax(60px, 90px));
+  font-size: 15px;
+  font-weight: 600;
+}
+.filtersbtn {
+  align-self: center;
+  justify-self: center;
+  grid-row: 2/2;
+  grid-column: 2/2;
+}
+
+.filterbtn,
+.searchbtn {
+  margin-right: 30px;
+  padding: 10px 0;
+  outline: none;
+  min-width: 100px;
+  height: 40px;
+  cursor: pointer;
+  color: #888;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  font-family: "Poppins-Regular", sans-serif;
+  background-color: #f2f2f2;
+  font-size: 15px;
+  line-height: 1.2;
+  transition: all 0.2s;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterbtn > *,
+.searchbtn > * {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.filterbtn:hover,
+.searchbtn:hover {
+  color: white;
+  background-color: rgb(113, 127, 224);
+}
+
+.lined {
+  color: #1e1e2c;
+  opacity: 0.5;
+  list-style: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.lined:hover,
+.selected {
+  opacity: 1;
+}
+.lined::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #1e1e2c;
+  transition: width 0.3s;
+}
+.lined:hover::after {
+  width: 60%;
+  transition: width 0.3s;
+}
+
+.filterarea {
+  display: grid;
+  height: 0;
+  opacity: 0;
+  margin: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1fr, 50px));
+  row-gap: 8px;
+  background-color: #ebebeb;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+.filterarea h1 {
+  margin: 20px 0px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.filterarea li {
+  margin-top: 8px;
+  list-style: none;
+}
+.filter {
+  height: 300px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.filteroff {
+  height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.Searcharea {
+  height: 80px;
+  z-index: -1;
+  margin: 35px;
+  display: flex;
+  background-color: transparent;
+  justify-items: center;
+  align-items: center;
+}
+
+.col {
+  width: 10px;
+  border: -0.3px solid;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-right: 13px;
+  display: inline-block;
+}
+
+.cardsProduct {
+  width: auto;
+  display: grid;
+  margin: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 10px;
+  row-gap: 50px;
+}
+.cardProduct {
+  box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-rows: 80% 20%;
+  width: 300px;
+  height: 430px;
+  justify-self: center;
+  background-position: center;
+}
+.QuickView {
+  position: relative;
+  opacity: 0;
+  top: -80px;
+  right: -90px;
+  font-weight: 600;
+  outline-style: none;
+  width: 130px;
+  padding: 11px 0;
+  align-items: center;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.2);
+
+  color: rgb(48, 50, 83);
+  border-radius: 30px;
+  font-size: 15px;
+  outline: none;
+  transition: all ease-out 0.3s;
+}
+
+.QuickView:hover {
+  background-color: #000000;
+  color: #ebebeb;
+}
+
+.QuickViewActive {
+  opacity: 1;
+  transform: translateY(-80px);
+  transition: all ease-out 0.4s;
+}
+.topcard {
+  width: 100%;
+  display: grid;
+}
+.imgDiv {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.imgProduct {
+  transition: all ease 0.4s;
+}
+.imgProduct:hover {
+  transform: scale(1.1);
+}
+.bottomcard {
+  margin-left: 2px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 50% 50%;
+  width: 100%;
+  margin-top: 6px;
+}
+.bottomcard span {
+  font-size: 16px;
+  color: #999;
+  font-weight: 300;
+  margin-top: 10px;
+}
+.bottomcard h2 {
+  font-size: 15px;
+  color: rgb(82, 78, 78);
+  font-weight: 300;
+  margin-top: 5px;
+}
+.iconFav {
+  cursor: pointer;
+  justify-self: end;
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 1280px) {
   nav {
     background-color: #ffffff;
@@ -488,6 +726,17 @@ nav {
     right: 0px;
     display: inline-block;
   }
+  .cardsProduct {
+    margin-left: 60px;
+  }
+  .Cgfilter,
+  .filterarea {
+    margin: 0px;
+  }
+  .filtersbtn {
+    grid-row: 3/3;
+    grid-column: 1/1;
+  }
 }
 .toggle .line1 {
   transform: rotate(-45deg) translate(-8px, 6px);
@@ -505,7 +754,6 @@ nav {
 .registerSc {
   margin-top: 50px;
 }
-
 @keyframes moving {
   from {
     opacity: 0;

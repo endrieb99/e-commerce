@@ -5,7 +5,6 @@ const ShopNowButton = () => {
             <button className="ShopNow">
                 SHOP NOW
                 </button>
-        
     )
 }
 
