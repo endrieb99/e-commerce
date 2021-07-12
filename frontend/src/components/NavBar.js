@@ -1,25 +1,24 @@
-import React , {useRef,useState,useEffect} from 'react'
+import React , {useRef,useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import { Route } from 'react-router-dom';
 import {Link, NavLink } from 'react-router-dom'
 import {RiShoppingCart2Line,MdSearch,BsArrowRightShort,MdKeyboardArrowRight} from "react-icons/all"
 import SearchNav from './SearchNav';
 
- const Nav = ({history}) => {
-    const [incart] = useState(0);
+ const NavBar = ({}) => {
     const[nav,setNav]=useState(false)
     const Nav = useRef(null)
+    //search
+    const searchRef = useRef(null)
+    const [showSearchIc,setShowSearchIc] = useState(false)
+    //Burger
+    const Buric = useRef(null)
+    const navLinks = useRef(null)
+    const rightItems = useRef(null)
+    //signin
+    const [signin,setSignin] = useState(null)
 
-     //search
-     const searchRef = useRef(null)
-     const [showSearchIc,setShowSearchIc] = useState(false)
-     //Burger
-     const Buric = useRef(null)
-     const navLinks = useRef(null)
-     const rightItems = useRef(null)
-     //signin
-     const [signin,setSignin] = useState(null)
-
-     const onSeacrhFun= () =>
+    const onSearchFun= () =>
         {
                 //Search Icon state + Bar
             setShowSearchIc(!showSearchIc) //false
@@ -27,15 +26,13 @@ import SearchNav from './SearchNav';
             searchRef.current.classList.toggle('searchActive')
             searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
         }  
-    const onDelSeacrh =  () =>{
-            
+        const onDelSearch =  () => {
             setShowSearchIc(!showSearchIc) //true
             searchRef.current.classList.toggle('searchActive')
-
         }
-    const onBurgActive = () =>{
-            //Toggle Nav
 
+        const onBurgActive = () =>{
+            //Toggle Nav
             const links = document.querySelectorAll('.navLinks li')
             navLinks.current.classList.toggle('burgerActive')
             rightItems.current.classList.toggle('burgerActive')
@@ -48,7 +45,6 @@ import SearchNav from './SearchNav';
                    }
                 else 
                 { 
-                       
                         link.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                         rightItems.current.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                        
@@ -64,6 +60,10 @@ import SearchNav from './SearchNav';
             else  setNav(false)
         }
         window.addEventListener('scroll',onChangeBack)
+
+        const dispatch= useDispatch()
+        const userLogin = useSelector(state => state.userLogin)
+        const {userInfo} = userLogin
         
     return (
        <nav ref = {Nav}  className={`nav ${nav ? 'active' : ''}`} >
@@ -83,15 +83,10 @@ import SearchNav from './SearchNav';
         <div  ref={searchRef} className="search">
         <Route render={({history}) => <SearchNav history ={history}/>}/>
         </div>
-                { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSeacrhFun}/>  }
+                { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSearchFun}/>  }
                 <Link to='/cart' > <RiShoppingCart2Line className='iconCart' size='26' />
-                { 
-                <div className='dotcart'>
-                    {incart}
-                </div>
-                }
                  </Link>
-                            <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
+                             <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
                             { !signin ? <BsArrowRightShort  size='25'/>  : <MdKeyboardArrowRight size='25'  /> }
                         </div>
                         </Link>
@@ -100,4 +95,4 @@ import SearchNav from './SearchNav';
     )                   
 }
 
-export default Nav 
+export default NavBar

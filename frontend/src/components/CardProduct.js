@@ -2,6 +2,7 @@ import {React,useState,useEffect} from 'react'
 import {HiOutlineShoppingCart,HiShoppingCart} from "react-icons/all"
 import { Image } from "@chakra-ui/react"
 import {Link } from 'react-router-dom'
+import Rating from './Rating'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CardProduct = ({product}) => {
@@ -14,12 +15,13 @@ const CardProduct = ({product}) => {
        const isincart = cartItems.find(x => x.product === product._id);
        if(isincart){
            setIncart(true);
-       }
-       return () => {    
-       }
-   }, 
-   )
 
+       }
+       return () => {
+           
+       }
+   }, )
+    
      return (
         <>  
             <div className='cardProduct' onMouseOver={ ()=> {setShowbtn (true)}} 
@@ -32,13 +34,18 @@ const CardProduct = ({product}) => {
                             <span>{product.name}</span>     
                        </Link>
                               {Incart ?  <HiShoppingCart className="iconFav" size ='26'/> : <HiOutlineShoppingCart  className="iconFav" color='#999' size='26'/>  }
+
                        <div className = 'productpricecard'> {`${product.price} $`}</div>
+                       <div className = 'Rating'>
+                       <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
+                       </div>
                </div>
                       <Link to={`/product/${product._id}`} exact >
                              <button className= { showbtn ? 'QuickView QuickViewActive' : 'QuickView' }> View Details</button>
                       </Link>   
              </div>      
          </>
+ 
     )
 }
 
