@@ -8,8 +8,7 @@ import {logout} from '../actions/userActions'
 import SearchNav from './SearchNav';
 
  const NavBar = ({history}) => {
-    const [incart,setincart] = useState(0);
-    const cart = useSelector(state => state.cart)
+    const [incart] = useState(0);
     const[nav,setNav]=useState(false)
     const Nav = useRef(null)
 
@@ -32,11 +31,6 @@ import SearchNav from './SearchNav';
             searchRef.current.classList.toggle('searchActive')
             searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
         }  
-        const onDelSearch =  () =>{
-            setShowSearchIc(!showSearchIc) //true
-            searchRef.current.classList.toggle('searchActive')
-
-        }
 
         const onBurgActive = () =>{
             //Toggle Nav
@@ -140,4 +134,5 @@ import SearchNav from './SearchNav';
        </nav>
     )                   
 }
+
 export default NavBar  
