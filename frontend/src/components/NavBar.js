@@ -2,23 +2,29 @@ import React , {useRef,useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Route } from 'react-router-dom';
 import {Link, NavLink } from 'react-router-dom'
-import {RiShoppingCart2Line,MdSearch,BsArrowRightShort,MdKeyboardArrowRight} from "react-icons/all"
+import { Button, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react"
+import {RiShoppingCart2Line,MdSearch,BsArrowRightShort,MdKeyboardArrowRight,IoLogOutOutline,CgProfile, IoMdArrowDropdown} from "react-icons/all"
+import {logout} from '../actions/userActions'
 import SearchNav from './SearchNav';
 
- const NavBar = ({}) => {
+ const NavBar = ({history}) => {
+    const [incart,setincart] = useState(0);
+    const cart = useSelector(state => state.cart)
     const[nav,setNav]=useState(false)
     const Nav = useRef(null)
-    //search
-    const searchRef = useRef(null)
-    const [showSearchIc,setShowSearchIc] = useState(false)
-    //Burger
-    const Buric = useRef(null)
-    const navLinks = useRef(null)
-    const rightItems = useRef(null)
-    //signin
-    const [signin,setSignin] = useState(null)
 
-    const onSearchFun= () =>
+     //search
+     const searchRef = useRef(null)
+     const [showSearchIc,setShowSearchIc] = useState(false)
+     //Burger
+     const Buric = useRef(null)
+     const navLinks = useRef(null)
+     const rightItems = useRef(null)
+     //signin
+     const [signin,setSignin] = useState(null)
+
+
+     const onSearchFun= () =>
         {
                 //Search Icon state + Bar
             setShowSearchIc(!showSearchIc) //false
@@ -26,13 +32,15 @@ import SearchNav from './SearchNav';
             searchRef.current.classList.toggle('searchActive')
             searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
         }  
-        const onDelSearch =  () => {
+        const onDelSearch =  () =>{
             setShowSearchIc(!showSearchIc) //true
             searchRef.current.classList.toggle('searchActive')
+
         }
 
         const onBurgActive = () =>{
             //Toggle Nav
+
             const links = document.querySelectorAll('.navLinks li')
             navLinks.current.classList.toggle('burgerActive')
             rightItems.current.classList.toggle('burgerActive')
@@ -65,6 +73,10 @@ import SearchNav from './SearchNav';
         const userLogin = useSelector(state => state.userLogin)
         const {userInfo} = userLogin
         
+        const logoutHandler = () => {
+            dispatch(logout())
+        }
+
     return (
        <nav ref = {Nav}  className={`nav ${nav ? 'active' : ''}`} >
            <div className="logo"><Link to =''>ALBANIA MARKET</Link></div>
@@ -85,14 +97,47 @@ import SearchNav from './SearchNav';
         </div>
                 { !showSearchIc && <MdSearch className='iconSearch' size='26' onClick={onSearchFun}/>  }
                 <Link to='/cart' > <RiShoppingCart2Line className='iconCart' size='26' />
+                {userInfo && !userInfo.isAdmin && 
+                <div className='dotcart'>
+                    {incart}
+                </div>
+                }
                  </Link>
-                             <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
+                            {userInfo ? (<div className="ic_sett_dis"><Link to="/profile"><CgProfile size="25" className="settingIcon"/></Link>
+                                <IoLogOutOutline size='28' className="displayIcon" onClick={logoutHandler}/>
+                                </div>
+                                
+                            ) : <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
                             { !signin ? <BsArrowRightShort  size='25'/>  : <MdKeyboardArrowRight size='25'  /> }
+
                         </div>
-                        </Link>
+                        </Link>}
+                        {userInfo && userInfo.isAdmin && (
+                            <Menu>
+                                  <MenuButton as = {Button}  rightIcon={<IoMdArrowDropdown />}>
+                                      Admin
+                                  </MenuButton>
+                                  <MenuList>
+                                  <MenuItem>
+                                  <Link to = '/admin/userlist'>
+                                        Users
+                                     </Link>
+                                  </MenuItem>
+                                  <MenuItem>
+                                  <Link to = '/admin/productlist'>
+                                        Products
+                                  </Link>
+                                  </MenuItem>
+                                  <MenuItem>
+                                  <Link to = '/admin/orderlist'>
+                                        Orders
+                                  </Link>
+                                  </MenuItem>
+                                  </MenuList>
+                            </Menu>
+                        )}
         </div>
        </nav>
     )                   
 }
-
-export default NavBar
+export default NavBar  
