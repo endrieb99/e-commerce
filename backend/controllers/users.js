@@ -1,4 +1,6 @@
-const User = require("../models/user");
+const Users = require("../models/user");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 
 const register = async (req, res) => {
@@ -50,8 +52,27 @@ const login = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+
+    try {
+        console.log(req.params)
+        const user = await Users.findById(req.params.id)
+        if (user) {
+            await user.remove()
+            res.json({ message: 'User removed' })
+        } else {
+            res.status(404)
+            throw new Error('User not found')
+        }
+    } catch (error) {
+        res.status(400).send(error)
+    }
+
+}
+
 
 module.exports = {
     register,
-    login
+    login,
+    deleteUser
 }

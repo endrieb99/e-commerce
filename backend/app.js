@@ -6,23 +6,29 @@ require('dotenv').config();
 const app = express();
 
 
+// Mongoose DB connection
+mongoose.connect(process.env.DB_CFG, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
+let db = mongoose.connection;
 
-// Connect to DB
-mongoose.connect('mongodb://localhost:27017/e-commerce', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+//Check connection
+db.once("open", function () {
+  console.log("Connection to MongoDB successful");
+});
 
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  console.log("connect to db")
+//Check DB errors
+db.on("error", function (err) {
+  console.log(err);
 });
 
 
 // Import Routes
 const userRoutes = require("./routes/users");
-
+const productRoutes = require("./routes/product");
 
 
 
@@ -35,7 +41,7 @@ app.use(express.json());
 
 // Use Routes
 app.use('/api/users', userRoutes);
-
+app.use('/api/products', productRoutes)
 
 
 
