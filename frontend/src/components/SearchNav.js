@@ -4,11 +4,11 @@ import { MdSearch } from 'react-icons/md'
 
 const SearchNav = ({history}) => {
     const [keyword, setkeyword] = useState('')
+
     const Handlesearch = (e) => {
         if(keyword.trim() && e.which === 13){
             history.push(`/search/${keyword}`)
-        } 
-        else {
+        }else{
         }
     }
     return (

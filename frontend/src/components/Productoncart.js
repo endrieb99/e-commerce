@@ -1,16 +1,13 @@
 import { Image } from '@chakra-ui/image'
-import React, { useRef, useState, useEffect } from 'react'
+import React,{useRef,useState,useEffect} from 'react'
 import { Select } from "@chakra-ui/react"
 import { VscChromeClose } from "react-icons/all";
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { addToCart,removeFromCart } from '../actions/cartActions';
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 
-
-
 const Productoncart = ({product}) => {
     const dispatch = useDispatch();
-
     const [qty,setqty] = useState(0)
     const select = useRef(null);
     useEffect(() => {
@@ -25,7 +22,7 @@ const Productoncart = ({product}) => {
     const removeFromCartHandler  = (id) =>{
         dispatch(removeFromCart(id))
     }
-
+    
     return (
         <div className = 'productcart'>
             <div className = 'imagecart'>
@@ -40,7 +37,7 @@ const Productoncart = ({product}) => {
                 <h2 className = 'priceproduct'>
                     {product.price}$</h2>
                 <h2 className = 'sandh'>
-                    sold and shiped by DHL</h2>
+                    sold and shiped by FedEx</h2>
                 </div>
                 <div className = 'qtyoption' >
                 <Select ref = {select} defaultValue = {product.qty}  onChange ={e =>dispatch(addToCart(product.product,Number(e.target.value)))}>

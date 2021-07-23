@@ -1,4 +1,4 @@
-import React , {useRef,useState} from 'react'
+import React , {useRef,useState,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Route } from 'react-router-dom';
 import {Link, NavLink } from 'react-router-dom'
@@ -8,7 +8,9 @@ import {logout} from '../actions/userActions'
 import SearchNav from './SearchNav';
 
  const NavBar = ({history}) => {
-    const [incart] = useState(0);
+    const [incart,setincart] = useState(0);
+    const cart = useSelector(state => state.cart)
+    const {cartItems} = cart
     const[nav,setNav]=useState(false)
     const Nav = useRef(null)
 
@@ -22,7 +24,6 @@ import SearchNav from './SearchNav';
      //signin
      const [signin,setSignin] = useState(null)
 
-
      const onSearchFun= () =>
         {
                 //Search Icon state + Bar
@@ -30,9 +31,9 @@ import SearchNav from './SearchNav';
             console.log(showSearchIc)
             searchRef.current.classList.toggle('searchActive')
             searchRef.current.style.animation = 'moving 0.3s ease both 0.3s'
-        }  
+        }
 
-        const onBurgActive = () =>{
+    const onBurgActive = () =>{
             //Toggle Nav
 
             const links = document.querySelectorAll('.navLinks li')
@@ -47,6 +48,7 @@ import SearchNav from './SearchNav';
                    }
                 else 
                 { 
+                       
                         link.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                         rightItems.current.style.animation = `moving 0.5s ease forwards ${index / 5 }s`
                        
@@ -55,7 +57,8 @@ import SearchNav from './SearchNav';
             //Burger Animation
             Buric.current.classList.toggle('toggle')
         }
-        const onChangeBack= () =>{
+    
+    const onChangeBack= () =>{
             if(window.scrollY >= 60){
                setNav(true)
             }
@@ -63,14 +66,22 @@ import SearchNav from './SearchNav';
         }
         window.addEventListener('scroll',onChangeBack)
 
-        const dispatch= useDispatch()
-        const userLogin = useSelector(state => state.userLogin)
-        const {userInfo} = userLogin
-        
-        const logoutHandler = () => {
-            dispatch(logout())
-        }
+    useEffect(() => {
+            const cart = cartItems.length ? cartItems.length : 0 ;
+            setincart(cart);
+            return () => {
+                setincart(0)
+            }
+    },[cart])
 
+
+    const dispatch= useDispatch()
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin    
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+    
     return (
        <nav ref = {Nav}  className={`nav ${nav ? 'active' : ''}`} >
            <div className="logo"><Link to =''>ALBANIA MARKET</Link></div>
@@ -99,11 +110,9 @@ import SearchNav from './SearchNav';
                  </Link>
                             {userInfo ? (<div className="ic_sett_dis"><Link to="/profile"><CgProfile size="25" className="settingIcon"/></Link>
                                 <IoLogOutOutline size='28' className="displayIcon" onClick={logoutHandler}/>
-                                </div>
-                                
+                                </div>        
                             ) : <Link to='/login' > <div className='signin' onMouseOver={ () => setSignin(!signin)}  onMouseOut={ ()=> setSignin(!signin) }  > Sign in 
                             { !signin ? <BsArrowRightShort  size='25'/>  : <MdKeyboardArrowRight size='25'  /> }
-
                         </div>
                         </Link>}
                         {userInfo && userInfo.isAdmin && (
@@ -135,4 +144,4 @@ import SearchNav from './SearchNav';
     )                   
 }
 
-export default NavBar  
+export default NavBar                      

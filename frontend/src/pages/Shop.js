@@ -1,6 +1,6 @@
 import React from 'react'
+import ProductsC from '../components/ProductsC';
 import  "./Shop.css";
-import  ProductsC from "../components/ProductsC";
 import { Helmet } from 'react-helmet';
 
 const Shop = () => {

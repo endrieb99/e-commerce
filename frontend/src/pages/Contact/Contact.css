@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   margin-bottom: 130px;
 }
+
 .headerContact {
   position: relative;
   display: inline-block;
@@ -40,32 +41,37 @@
 .card-contact:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+
 .sendMsg {
   display: block;
   border-right: 1px solid rgba(179, 179, 179, 0.664);
   padding: 30px 60px;
   width: 50%;
 }
+
 .envolope {
   position: relative;
 }
+
 .sendMsg h4 {
   display: flex;
   font-size: 28px;
   font-weight: 400;
   justify-content: center;
 }
+
 .sendMsg .inputContact {
   display: flex;
-
   justify-content: center;
   margin-top: 40px;
 }
+
 .sendMsg .textAreaCnt {
   display: flex;
   margin-top: 25px;
   justify-content: center;
 }
+
 .contactBtn {
   display: flex;
   margin-top: 30px;
@@ -75,10 +81,12 @@
   color: white;
   outline-style: none;
 }
+
 .contentContact {
   display: flex;
   justify-content: center;
 }
+
 .showAdrss {
   padding-top: 100px;
   width: 50%;
@@ -101,6 +109,7 @@
   justify-content: center;
   font-size: 31px;
 }
+
 .adressCtn h3 {
   font-size: 25px;
   font-weight: 700;
@@ -119,14 +128,17 @@
   flex-direction: column;
   font-weight: 300;
 }
+
 .infoCtn {
   color: rgb(68, 96, 255);
   font-weight: 500;
 }
+
 @media screen and (max-width: 768px) {
   .card-contact {
     flex-direction: column;
   }
+
   .sendMsg {
     width: 100%;
     border: 1px solid rgba(179, 179, 179, 0.664);

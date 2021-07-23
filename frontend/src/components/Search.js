@@ -6,7 +6,7 @@ const Search = ({history}) => {
     const Handlesearch = (e) => {
         if(keyword.trim() && e.which === 13){
             history.push(`/search/${keyword}`)
-        } else{
+        }else{
         }
     }
     return (

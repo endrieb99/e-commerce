@@ -24,17 +24,15 @@ const ProductsC = ({match,history}) => {
     const productbyprice = useSelector((state)=>{
         return state.Listproductbyprice
     })
-    
-    const {loading,error,products} = productbycg ? productbycg : productList ? productList : productbyprice;
+    const {loading,error,products} = productbycg ? productbycg : productList ? productList : productbyprice ;
     useEffect(()=>{
         if(Cg){
             console.log(window.location.search.split('=')[0])
             if(window.location.search.split('=')[0] === '?cg'){
                 dispatch(ListproductbyCg(Cg))
                 console.log(products)
-            } else{
+            }else{
                 dispatch(Listproductbyfiter(Cg))
-
             }
         }else{
             dispatch(listProducts(keyword))
@@ -48,18 +46,16 @@ const ProductsC = ({match,history}) => {
             setshowsearch(false)
         }
     }
-
     const searchfunc=()=>{
         setshowsearch(!showsearch);
         if(showfilter){
             setshowfilter(false)
         }
     }
-
     const pricehandler = ()=>{
         dispatch(Listproductbyprice(From,To))
     }
-
+    
     return (
         <>
         <div className = 'Cgfilter'>
@@ -68,7 +64,7 @@ const ProductsC = ({match,history}) => {
             <button className = {`filterbtn ${showfilter ? 'activebtn' : ''}` }  
             onClick = {filterfunc} > {showfilter ?  <IoMdClose  size = '20'/>: <BsFilter size = '20'/> } 
             Filter
-            </button>   
+            </button>  
             <button className = {`searchbtn ${showsearch ? 'activebtn' : ''}` } onClick = {searchfunc}>{showsearch ?  <IoMdClose  size = '20'/>:<AiOutlineSearch size = '20'/>}Search</button>
             </div>
             <div className = 'filters'> 
@@ -120,7 +116,7 @@ const ProductsC = ({match,history}) => {
             <h1 className = 'nothingfound'>Nothing Found !!!</h1> : <div className='cardsProduct'>
                        {products.map((product) =>(
                                <CardProduct key={product._id} product={product} />
-                          ) )}
+                          )  )}    
                  </div> }
         </> 
     )
