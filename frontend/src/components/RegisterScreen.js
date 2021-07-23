@@ -37,7 +37,6 @@ const RegisterScreen = ({location, history}) => {
   }
 
   const inputs = document.querySelectorAll(".inputa");
-
   function addcl(){
     let parent = this.parentNode.parentNode;
     parent.classList.add("focus");
@@ -55,7 +54,7 @@ const RegisterScreen = ({location, history}) => {
     inputa.addEventListener("blur", remcl);
   });
   
-    return (
+  return (
         <div className="registerSc">
           <Helmet>
             <title>
@@ -99,7 +98,7 @@ const RegisterScreen = ({location, history}) => {
            		   <div className="i"> 
            		    	<i className="fas fa-lock"></i>
            		   </div>
-           		   <div className="div">   	
+           		   <div className="div">
            		    	<input type="password" value={confirmPassword} className="inputa" placeholder="Confirm password" onChange={(e) => setConfirmPassword(e.target.value)}/>
             	   </div>
             	</div>

@@ -1,7 +1,6 @@
-import React,{useRef,useEffect, useState} from 'react'
+import React,{useRef,useEffect} from 'react'
 import { Helmet } from 'react-helmet';
 import {Image} from '@chakra-ui/react'
-// import HashLoader from "react-spinners/HashLoader";
 import './About.css'
 
 const About = () => {
@@ -12,22 +11,14 @@ const About = () => {
         Line.current.classList.add('lineon')
         text.current.classList.add('titleon');
         },5)
-
-
         return () => {
-
         }
     },[])
     return (
-        
-
-        
         <>
         <Helmet>
             <title>About</title>
         </Helmet>
-
-
             <div className='headingA'>
                 <div className = 'line' ref={Line}>
                 </div>

@@ -3,6 +3,7 @@ import {HiOutlineShoppingCart,HiShoppingCart} from "react-icons/all"
 import { Image } from "@chakra-ui/react"
 import {Link } from 'react-router-dom'
 import Rating from './Rating'
+import { addToCart } from "../actions/cartActions";
 import { useDispatch, useSelector } from 'react-redux'
 
 const CardProduct = ({product}) => {
@@ -15,14 +16,17 @@ const CardProduct = ({product}) => {
        const isincart = cartItems.find(x => x.product === product._id);
        if(isincart){
            setIncart(true);
-
        }
        return () => {
-           
        }
    }, )
+   
+   const addcart = ()=>{
+       setIncart(true);
+       dispatch(addToCart(product._id,1))
+   }
     
-     return (
+    return (
         <>  
             <div className='cardProduct' onMouseOver={ ()=> {setShowbtn (true)}} 
                                           onMouseLeave= { ()=> {setShowbtn (false)}}>           
@@ -33,8 +37,7 @@ const CardProduct = ({product}) => {
                        <Link to={`/product/${product._id}`} exact  >     
                             <span>{product.name}</span>     
                        </Link>
-                              {Incart ?  <HiShoppingCart className="iconFav" size ='26'/> : <HiOutlineShoppingCart  className="iconFav" color='#999' size='26'/>  }
-
+                              {Incart ?  <HiShoppingCart className="iconFav" size ='26'/> : <HiOutlineShoppingCart  className="iconFav" color='#999' size='26'  onClick = {addcart}/>  }
                        <div className = 'productpricecard'> {`${product.price} $`}</div>
                        <div className = 'Rating'>
                        <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
@@ -45,7 +48,6 @@ const CardProduct = ({product}) => {
                       </Link>   
              </div>      
          </>
- 
     )
 }
 

@@ -9,10 +9,9 @@ import login_svg from './img/login.svg'
 import wave from './img/wavev.png'
 import './LoginScreen.css'
 
-
 const LoginScreen = ({location, history}) => {
   const [email,setEmail] = useState('')
-  const [password,setPassword] = useState('')   
+  const [password,setPassword] = useState('')
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
   const { error, userInfo } = userLogin
@@ -31,7 +30,6 @@ const LoginScreen = ({location, history}) => {
 
   const inputs = document.querySelectorAll(".inputa");
 
-
   function addcl(){
     let parent = this.parentNode.parentNode;
     parent.classList.add("focus");
@@ -43,25 +41,19 @@ const LoginScreen = ({location, history}) => {
       parent.classList.remove("focus");
     }
   }
-  
-  
+    
   inputs.forEach(inputa => {
     inputa.addEventListener("focus", addcl);
     inputa.addEventListener("blur", remcl);
   });
   
-
-
     return (
         <div>
           <Helmet>
             <title>Login</title>
-
           </Helmet>
           	<Image className="wave" src={wave} />
-
             <div className="containera">
-              
 		<div className="imga">
 			<Image src={login_svg} />
 		</div>
@@ -74,7 +66,6 @@ const LoginScreen = ({location, history}) => {
                      <i class="fas fa-envelope"></i>
            		   </div>
            		   <div className="div">
-           		   		
            		   		<input type="text" value={email} className="inputa" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
            		   </div>
            		</div>
@@ -83,20 +74,15 @@ const LoginScreen = ({location, history}) => {
            		    	<i className="fas fa-lock"></i>
            		   </div>
            		   <div className="div">
-           		    	
            		    	<input type="password" value={password} className="inputa" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
             	   </div>
             	</div>
-            	
             	<input type="submit" className="btna" value="Login" />
-               
               <div className='div-forgot'>
                               <span>Forgot </span>
                          <Link className ='text-forgot'  to ='/forgot'>Password? </Link>
-                         
                          </div>
               <Link className="createAcc" to={redirect ? `/register?redirect=${redirect}` : '/register'}>Create your Account <BsArrowRight size="25"/></Link>
-             
             </form>
         </div>
     </div>
