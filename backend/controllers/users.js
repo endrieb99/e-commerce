@@ -15,16 +15,23 @@ const register = async (req, res) => {
         const hashPassword = await bcrypt.hash(req.body.password, salt);
 
         // Create User
-        const user = new Users({
+        const user = await Users.create({
             name: req.body.name,
             email: req.body.email,
             password: hashPassword,
-            role: 1
+            role: 0
         });
 
-        // Save User
-        const savedUser = await user.save();
-        res.send({ user: user._id });
+        if (user) {
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+            res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: false,
+                token: token
+            })
+        }
 
     } catch (error) {
         res.status(400).send({ error: error });
@@ -45,27 +52,48 @@ const login = async (req, res) => {
 
         //Create token
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-        res.header('auth-token', token).send({ jwt: token });
+        //res.header('auth-token', token).send({ jwt: token });
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.role,
+            token: token
+        })
 
     } catch (error) {
         res.status(400).send({ error: error });
     }
 }
 
+const getUserProfile = async (req, res) => {
+
+    const user = await Users.findById(req.user._id)
+
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.role,
+        })
+    } else {
+        res.status(404).send({ error: "User not found" })
+    }
+}
+
 const deleteUser = async (req, res) => {
 
     try {
-        console.log(req.params)
         const user = await Users.findById(req.params.id)
         if (user) {
             await user.remove()
             res.json({ message: 'User removed' })
         } else {
-            res.status(404)
-            throw new Error('User not found')
+            res.status(404).send({ error: "User not found" })
         }
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send({ error })
     }
 
 }

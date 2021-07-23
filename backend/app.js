@@ -3,6 +3,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// Import Routes
+const userRoutes = require("./routes/users");
+const productRoutes = require("./routes/product");
+const orderRoutes = require("./routes/order");
+
+
+
 const app = express();
 
 
@@ -26,11 +33,6 @@ db.on("error", function (err) {
 });
 
 
-// Import Routes
-const userRoutes = require("./routes/users");
-const productRoutes = require("./routes/product");
-
-
 
 // Use middlewares
 app.use(cors());
@@ -41,7 +43,8 @@ app.use(express.json());
 
 // Use Routes
 app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes)
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
 
 
 
