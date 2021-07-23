@@ -23,7 +23,7 @@ import {
 export const listProducts =  (keyword = '') => async(dispatch) => {
     try {
         dispatch({type : PRODUCT_LIST_REQUEST})
-        const { data }  = await axios.get(`/api/products?keyword=${keyword}`)        
+        const { data }  = await axios.get(`http://localhost:5000/api/products?keyword=${keyword}`)        
         dispatch({type : PRODUCT_LIST_SUCCESS,
                   payload : data,
                  })
@@ -40,7 +40,7 @@ export const listProducts =  (keyword = '') => async(dispatch) => {
 export const ListproductbyCg = (Cg) => async (dispatch) =>{
     try {
         dispatch({type : PRODUCT_LIST_REQUEST })
-        const {data} = await axios.get(`/api/products/?Cg=${Cg}`)
+        const {data} = await axios.get(`http://localhost:5000/api/products/?Cg=${Cg}`)
         dispatch({type : PRODUCT_LIST_SUCCESS , payload : data})
         console.log(data)
         } catch (error) {
@@ -53,7 +53,7 @@ export const ListproductbyCg = (Cg) => async (dispatch) =>{
 export const Listproductbyfiter = (filter) => async (dispatch) =>{
     try {
         dispatch({type : PRODUCT_LIST_REQUEST })
-        const {data} = await axios.get(`/api/products/?filter=${filter}`)
+        const {data} = await axios.get(`http://localhost:5000/api/products/?filter=${filter}`)
         dispatch({type : PRODUCT_LIST_SUCCESS , payload : data})
         console.log(data)
         } catch (error) {
@@ -66,7 +66,7 @@ export const Listproductbyfiter = (filter) => async (dispatch) =>{
 export const Listproductbyprice = (from,to) => async (dispatch) =>{
     try {
         dispatch({type : PRODUCT_LIST_REQUEST })
-        const {data} = await axios.get(`/api/products/?from=${from}&to=${to}`)
+        const {data} = await axios.get(`http://localhost:5000/api/products/?from=${from}&to=${to}`)
         dispatch({type : PRODUCT_LIST_SUCCESS , payload : data})
         console.log(data)
         } catch (error) {
@@ -79,7 +79,7 @@ export const Listproductbyprice = (from,to) => async (dispatch) =>{
 export const listProductDetails =  (id) => async(dispatch) => {
     try {
         dispatch({type : PRODUCT_DETAILS_REQUEST})        
-        const { data }  = await axios.get(`/api/products/${id}`)
+        const { data }  = await axios.get(`http://localhost:5000/api/products/${id}`)
         dispatch({type : PRODUCT_DETAILS_SUCCESS,
                   payload : data,
                  })
@@ -104,7 +104,7 @@ export const DeleteProduct = (id) => async(dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        await axios.delete(`/api/products/${id}`, config) 
+        await axios.delete(`http://localhost:5000/api/products/${id}`, config) 
         dispatch({
             type: PRODUCT_DELETE_SUCCESS,
                 })
@@ -130,7 +130,7 @@ export const CreateProduct = () => async(dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const {data} = await axios.post(`/api/products/`,{}, config) 
+        const {data} = await axios.post(`http://localhost:5000/api/products/`,{}, config) 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
             payload : data
@@ -160,7 +160,7 @@ export const UpdateProduct = (product) => async(dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const {data} = await axios.put(`/api/products/${product._id}`,product, config) 
+        const {data} = await axios.put(`http://localhost:5000/api/products/${product._id}`,product, config) 
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
             payload : data
@@ -188,7 +188,7 @@ export const createproductReview = (productId,review) => async(dispatch, getStat
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        await axios.post(`/api/products/${productId}/reviews`,review, config) 
+        await axios.post(`http://localhost:5000/api/products/${productId}/reviews`,review, config) 
         dispatch({
             type: PRODUCT_CREATE_REVIEW_SUCCESS,
                 })

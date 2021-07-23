@@ -3,25 +3,34 @@ const User = require("../models/user");
 
 const auth = async (req, res, next) => {
 
-    try {
 
-        const token = req.header('auth-token');
+    let token;
 
-        if (!token)
-            return res.status(401).send({ error: "Access Denied" });
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
 
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await  User.findById(verified._id)
-        next();
-    } catch (error) {
-        res.status(400).send({ error: "invalid token" });
+            token = req.headers.authorization.split(' ')[1]
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+            req.user = await User.findById(decoded.id).select('-password')
+            next()
+        } catch (error) {
+            console.error(error)
+            res.status(401)
+            throw new Error('Not authorized, token failed')
+
+        }
+    }
+    if (!token) {
+        res.status(401).send({ error: "Not authorized, no token" })
+        //throw new Error('Not authorized, no token')
     }
 }
 
 const admin = (req, res, next) => {
     try {
 
-        if (req.user && req.user.role === 2)
+        if (req.user && req.user.role == 2)
             next();
         else
             return res.status(401).send({ error: "Not Authorized as an admin" });

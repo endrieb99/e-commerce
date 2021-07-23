@@ -4,11 +4,11 @@ const { auth, admin } = require("../middleware/auth");
 
 // Get, Post Products
 router.get("/", productController.getProducts)
-router.post('/', auth, admin, productController.createProduct);
+router.post('/', auth, productController.createProduct);
 
 // Get, Put, Delete Products By Id
 router.get('/:id', productController.getProductById)
-router.put('/:id', auth, admin, productController.updateProduct);
+router.put('/:id', auth, productController.updateProduct);
 router.delete('/:id', auth, admin, productController.deleteProduct);
 
 
