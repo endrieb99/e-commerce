@@ -38,10 +38,10 @@ const Checkout = ({history}) => {
                         <label className="this-label">Country</label><br /> 
                         <Stack spacing={3}>
                             <Select variant="flushed" onChange = {(e) => setCountry(e.target.value)} >
-                                <option value="ALBANIA">Maroc</option>
-                                <option value="KOSOVO">Algerie</option>
-                                <option value="MACEDONIA">France</option>
-                                <option value="ITALY">Espagne</option>
+                                <option value="ALBANIA">ALBANIA</option>
+                                <option value="KOSOVO">KOSOVO</option>
+                                <option value="REPUBLIC OF NORTH MACEDONIA">REPUBLIC OF NORTH MACEDONIA</option>
+                                <option value="ITALY">ITALY</option>
                             </Select>
                         </Stack>
                         <div className="city-cp-check">
