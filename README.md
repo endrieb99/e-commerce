@@ -24,7 +24,7 @@ Node server will run at http://localhost:5000/ and React app will run at http://
 
 Commands to start in backend folder:
 npm install
-npm run dev
+npm start
 
 Commands to start in frontend folder:
 npm install
