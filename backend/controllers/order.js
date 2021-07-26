@@ -40,7 +40,18 @@ const getOrders = async (req, res) => {
     }
 }
 
+const getMyOrders = async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user._id })
+        res.json(orders)
+    } catch (error) {
+        res.status(400).send({error: "Server Error!"})
+    }
+
+}
+
 module.exports = {
     getOrders,
-    addOrder
+    addOrder,
+    getMyOrders
 }

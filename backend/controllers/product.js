@@ -54,15 +54,16 @@ const createProduct = async (req, res) => {
 
     try {
         const product = new Product({
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
+            name: 'Sample name',
+            price: 0,
+            description: 'sample description',
             user: req.user._id,
-            sizes: req.body.sizes,
-            images: req.body.images,
-            category: req.body.category,
-            countInStock: req.body.countInStock,
-            numReviews: req.body.numReviews
+            sizes: [],
+            images: [],
+            category: [],
+            countInStock: 0,
+            numReviews: 0
+
         })
         const createProduct = await product.save();
         res.status(201).json(createProduct);
@@ -95,6 +96,7 @@ const updateProduct = async (req, res) => {
         const { name, price, description, category, sizes, Images, countInStock } = req.body
 
         const product = await Product.findById(req.params.id)
+        console.log(req.params)
         if (product) {
             product.name = name
             product.price = price
