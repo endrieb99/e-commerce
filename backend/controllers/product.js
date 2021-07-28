@@ -5,7 +5,7 @@ const Product = require("../models/product");
 const getProducts = async (req, res) => {
     try {
 
-        const category = req.query.category;
+        const category = req.query.Cg;
         const filter = req.query.filter;
         const from = req.query.from
         const to = req.query.to
