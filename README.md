@@ -29,4 +29,3 @@ npm start
 Commands to start in frontend folder:
 npm install
 npm start
-e
